@@ -1,0 +1,197 @@
+﻿@model SistemaBiomedico.ViewModels.UserVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Registrar Usuario</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+            body {
+                background: linear-gradient(135deg, #dff4ff, #ffffff);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Segoe UI', sans-serif;
+            }
+
+            .register-container {
+                width: 950px;
+                background: white;
+                border-radius: 25px;
+                overflow: hidden;
+                box-shadow: 0 15px 35px rgba(0,0,0,.10);
+            }
+
+            .left-panel {
+                background: linear-gradient(135deg,#1B4965,#2E86AB);
+                color: white;
+                padding: 50px;
+            }
+
+            .hospital-icon {
+                font-size: 70px;
+                margin-bottom: 20px;
+            }
+
+            .left-panel h1 {
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+
+            .left-panel p {
+                opacity: .95;
+            }
+
+            .right-panel {
+                padding: 50px;
+            }
+
+            .title-register {
+                color: #1B4965;
+                font-weight: 700;
+            }
+
+            .subtitle {
+                color: #7f8c8d;
+                margin-bottom: 25px;
+            }
+
+            .form-control,
+            .form-select {
+                border-radius: 12px;
+                height: 50px;
+                border: 1px solid #d6e4ea;
+            }
+
+                .form-control:focus,
+                .form-select:focus {
+                    border-color: #2E86AB;
+                    box-shadow: 0 0 0 .2rem rgba(46,134,171,.15);
+                }
+
+            .btn-save {
+                height: 50px;
+                border: none;
+                border-radius: 12px;
+                background: #1B4965;
+                color: white;
+                font-weight: 600;
+                transition: .3s;
+            }
+
+                .btn-save:hover {
+                    background: #14384e;
+                    transform: translateY(-2px);
+                }
+
+            .logo-circle {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                background: rgba(255,255,255,.20);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 25px;
+            }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="row g-0">
+
+            <div class="col-md-5 left-panel d-flex flex-column justify-content-center">
+
+                <div class="logo-circle">
+                    <div class="hospital-icon">👩‍⚕️</div>
+                </div>
+
+                <h1>Gestión de Usuarios</h1>
+
+                <p>
+                    Registro de personal autorizado para el Sistema de Gestión de Equipos Biomédicos.
+                </p>
+
+                <p>
+                    Asigne roles de Administrador, Técnico u Operativo según las funciones del trabajador.
+                </p>
+
+            </div>
+
+            <div class="col-md-7 right-panel">
+
+                <h2 class="title-register">
+                    Registrar Usuario
+                </h2>
+
+                <p class="subtitle">
+                    Complete la información del trabajador.
+                </p>
+
+                <form asp-controller="Login"
+                      asp-action="Registro"
+                      method="post"
+                      autocomplete="off">
+
+                    <input class="form-control mb-3"
+                           type="text"
+                           placeholder="Nombre completo"
+                           required
+                           asp-for="Name" />
+
+                    <input class="form-control mb-3"
+                           type="email"
+                           placeholder="Correo"
+                           required
+                           asp-for="Email" />
+
+                    <input class="form-control mb-3"
+                           type="password"
+                           placeholder="Contraseña"
+                           required
+                           asp-for="Pass" />
+
+                    <input class="form-control mb-3"
+                           type="password"
+                           placeholder="Confirmar contraseña"
+                           required
+                           asp-for="RepPass" />
+
+                    <select class="form-select mb-3"
+                            asp-for="IdRol"
+                            asp-items="@(new SelectList(ViewBag.Roles, "IdRol", "Nombre"))">
+
+                        <option value="">
+                            Seleccione un rol
+                        </option>
+
+                    </select>
+
+                    <div class="d-grid">
+
+                        <button class="btn-save"
+                                type="submit">
+                            Guardar Usuario
+                        </button>
+
+                    </div>
+                </form>
+                @if (ViewData["Mensaje"] != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @ViewData["Mensaje"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

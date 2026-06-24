@@ -1,0 +1,140 @@
+﻿@model List<SistemaBiomedico.Models.Equipo>
+
+<style>
+    .page-title {
+        color: #1B4965;
+        font-weight: 700;
+    }
+
+    .card-custom {
+        background: white;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,.08);
+        padding: 25px;
+    }
+
+    .btn-new {
+        background: #1F6F8B;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        color: white;
+    }
+
+        .btn-new:hover {
+            background: #17586D;
+            color: white;
+        }
+
+    .table {
+        margin-top: 20px;
+    }
+
+        .table thead {
+            background: #1F6F8B;
+            color: white;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+    .btn-edit {
+        background: #2E86AB;
+        color: white;
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-edit:hover {
+            background: #247194;
+            color: white;
+        }
+</style>
+
+<div class="container mt-4">
+    <div class="card-custom">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="page-title">
+                🩺 Gestión de Equipos Biomédicos
+            </h2>
+
+            @* SOLO ADMIN VE EL BOTÓN *@
+            @if (User.IsInRole("Administrador"))
+            {
+                <a asp-controller="Equipo"
+                   asp-action="Nuevo"
+                   class="btn btn-new">
+                    Nuevo Equipo
+                </a>
+            }
+        </div>
+
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Área</th>
+
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdEquipo</td>
+                        <td>@item.NombreEquipo</td>
+                        <td>@item.CategoriaEquipo</td>
+                        <td>@item.MarcaEquipo</td>
+                        <td>@item.ModeloEquipo</td>
+                        <td>
+                            @(item.Areas != null ? item.Areas.NombreArea : "Sin Área")
+                        </td>
+
+                        <td>
+                            @if (User.IsInRole("Administrador"))
+                            {
+                                <a asp-action="Editar"
+                                   asp-route-id="@item.IdEquipo"
+                                   class="btn btn-edit btn-sm">
+                                    Editar
+                                </a>
+
+                                <a asp-action="Eliminar"
+                                   asp-route-id="@item.IdEquipo"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirmar()">
+                                    Eliminar
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Solo lectura
+                                </span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmar() {
+            return confirm("¿Está seguro que desea eliminar este equipo?");
+        }
+    </script>
+}

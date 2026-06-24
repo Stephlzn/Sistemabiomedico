@@ -1,0 +1,42 @@
+﻿@model SistemaBiomedico.Models.Equipo
+<div>
+    <div class="col-sm-8 offset-sm-2">
+        <h2>Editar Equipo</h2>
+        <form asp-controller="Equipo" asp-action="Editar" method="post">
+
+            <input asp-for="IdEquipo" type="hidden" />
+
+            <div class="mb-3">
+                <label>Nombre Equipo</label>
+                <input class="form-control" asp-for="NombreEquipo" />
+            </div>
+
+            <div class="mb-3">
+                <label>Categoría</label>
+                <input class="form-control" asp-for="CategoriaEquipo" />
+            </div>
+
+            <div class="mb-3">
+                <label>Marca</label>
+                <input class="form-control" asp-for="MarcaEquipo" />
+            </div>
+
+            <div class="mb-3">
+                <label>Modelo</label>
+                <input class="form-control" asp-for="ModeloEquipo" />
+            </div>
+
+            <button class="btn btn-success" type="submit">
+                Guardar
+            </button>
+
+            <a asp-controller="Equipo"
+               asp-action="Listar"
+               class="btn btn-danger">
+                Volver
+            </a>
+
+        </form>
+    </div>
+</div>
+

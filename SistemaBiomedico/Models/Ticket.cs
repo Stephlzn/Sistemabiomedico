@@ -7,24 +7,18 @@ namespace SistemaBiomedico.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTicket { get; set; }
-        [Required, StringLength(200)]
-        public string TipoFalla { get; set; }
-        [Required, StringLength(1000)]
+        [Required, StringLength(100)]
         public string Descripcion { get; set; }
-        [Required, StringLength(200)]
-        public string Urgencia { get; set; }
-        [Required, StringLength(200)]
+
+        [Required]
+        public DateOnly FechaCreacion { get; set; }
+        [Required, StringLength(50)]
         public string Estado { get; set; }
-        [Required]
-        public DateTime FechaCreacion { get; set; }
-        [Required]
-        public DateTime? FechaCierre { get; set; }
-
-        public int EquipoId { get; set; }
+        [Required, StringLength(50)]
+        public string Prioridad { get; set; }
+        public int IdEquipo { get; set; }
         public Equipo Equipo { get; set; }
-        public int UsuarioId { get; set; }
-
+        public int IdUsuario { get; set; }
         public Usuario Usuario { get; set; }
-        public ICollection<RegistroInter> RegistrosInter { get; set; }
     }
 }

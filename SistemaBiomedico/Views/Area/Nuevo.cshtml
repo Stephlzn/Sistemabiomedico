@@ -1,0 +1,88 @@
+﻿@model SistemaBiomedico.Models.Areas
+<style>
+    .card-custom {
+        background: white;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,.08);
+        padding: 30px;
+    }
+
+    .page-title {
+        color: #1B4965;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #1B4965;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        height: 50px;
+        border: 1px solid #d6e4ea;
+    }
+
+        .form-control:focus {
+            border-color: #1F6F8B;
+            box-shadow: 0 0 0 .2rem rgba(31,111,139,.15);
+        }
+
+    .btn-save {
+        background: #1F6F8B;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 25px;
+        font-weight: 600;
+        color: white;
+    }
+
+        .btn-save:hover {
+            background: #17586D;
+            color: white;
+        }
+
+    .btn-back {
+        border-radius: 10px;
+        padding: 10px 25px;
+        font-weight: 600;
+    }
+</style>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-custom">
+                <h2 class="page-title">
+                    🏢 Registro de Áreas
+                </h2>
+                <form asp-controller="Area"
+                      asp-action="Nuevo"
+                      method="post"
+                      autocomplete="off">
+                    <div class="mb-4">
+                        <label class="form-label">
+                            Nombre del Área
+                        </label>
+                        <input class="form-control"
+                               type="text"
+                               asp-for="NombreArea"
+                               required />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-save"
+                                type="submit">
+                            Guardar
+                        </button>
+                        <a asp-controller="Area"
+                           asp-action="Listar"
+                           class="btn btn-danger btn-back">
+                            Volver
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

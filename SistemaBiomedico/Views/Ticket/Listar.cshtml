@@ -1,0 +1,127 @@
+﻿@model List<SistemaBiomedico.Models.Ticket>
+<style>
+    .page-title {
+        color: #1B4965;
+        font-weight: 700;
+    }
+
+    .card-custom {
+        background: white;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,.08);
+        padding: 25px;
+    }
+
+    .btn-new {
+        background: #1F6F8B;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        color: white;
+    }
+
+        .btn-new:hover {
+            background: #17586D;
+            color: white;
+        }
+
+    .table {
+        margin-top: 20px;
+    }
+
+        .table thead {
+            background: #1F6F8B;
+            color: white;
+        }
+
+        .table th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+    .btn-edit {
+        background: #2E86AB;
+        color: white;
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-edit:hover {
+            background: #247194;
+            color: white;
+        }
+
+    .estado-pendiente {
+        background: #fff3cd;
+        color: #856404;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-weight: 600;
+    }
+
+</style>
+<div class="container mt-4">
+    <div class="card-custom">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h2 class="page-title">
+                Gestión de Incidencias
+            </h2>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Equipo</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td class="text-center">
+                            @item.IdTicket
+                        </td>
+
+                        <td>
+                            @(item.Equipo != null ? item.Equipo.NombreEquipo : "Sin Equipo")
+                        </td>
+
+                        <td>
+                            @item.Descripcion
+                        </td>
+
+                        <td>
+                            @item.FechaCreacion.ToString("dd/MM/yyyy")
+                        </td>
+                        <td class="text-center">
+                            <span class="estado-pendiente">
+                                @item.Estado
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <a asp-controller="Ticket"
+                               asp-action="Editar"
+                               asp-route-id="@item.IdTicket"
+                               class="btn btn-edit btn-sm">
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

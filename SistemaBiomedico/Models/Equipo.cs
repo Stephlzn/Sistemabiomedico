@@ -5,17 +5,19 @@ namespace SistemaBiomedico.Models
 {
     public class Equipo
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdEquipo { get; set; }
         [Required, StringLength(100)]
-        public string NameEquipo { get; set; }
+        public string NombreEquipo { get; set; }
         [Required, StringLength(100)]
-        public string Categoria { get; set; }
+        public string CategoriaEquipo { get; set; }
         [Required, StringLength(100)]
-        public string Ubicacion { get; set; }
+        public string MarcaEquipo { get; set; }
         [Required, StringLength(100)]
-        public string Estado { get; set; }
-        public DateOnly FechaRegistro { get; set; }
+        public string ModeloEquipo { get; set; }
+
+        public int IdAreas { get; set; }
+        public Areas Areas { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
     }
 }

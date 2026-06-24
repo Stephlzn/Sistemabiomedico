@@ -1,0 +1,117 @@
+﻿@{
+ViewData["Title"] = "Panel Operativo";
+}
+<style>
+    body {
+        background: #f4f8fb;
+    }
+
+    .welcome-card {
+        background: linear-gradient(135deg,#1B4965,#2E86AB);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(0,0,0,.10);
+    }
+
+    .btn-logout {
+        background: white;
+        color: #1B4965;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: .3s;
+    }
+
+        .btn-logout:hover {
+            background: #f1f1f1;
+            color: #1B4965;
+        }
+
+    .module-card {
+        border: none;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,.08);
+        transition: .3s;
+        height: 100%;
+    }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,.12);
+        }
+
+    .module-icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
+
+    .module-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1B4965;
+    }
+
+    .module-text {
+        color: #6c757d;
+        font-size: 14px;
+    }
+</style>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="welcome-card">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <h2>📋 Panel Operativo</h2>
+                <h4>Bienvenido, @User.Identity.Name</h4>
+                <p>
+                    Reporte de incidencias y consulta de equipos biomédicos.
+                </p>
+            </div>
+
+            <a asp-controller="Login"
+               asp-action="Logout"
+               class="btn-logout">
+                Cerrar Sesión
+            </a>
+
+        </div>
+    </div>
+}
+<div class="row g-4">
+    <div class="col-md-4">
+        <a asp-controller="Ticket"
+           asp-action="Nuevo"
+           class="module-card">
+            <div class="module-icon">🚨</div>
+            <div class="module-title">
+                Reportar Incidencia
+            </div>
+            <div class="module-text">
+                Registrar una falla o problema en un equipo biomédico.
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-controller="Ticket"
+           asp-action="Listar"
+           class="module-card">
+            <div class="module-icon">📋</div>
+            <div class="module-title">
+                Mis Tickets
+            </div>
+            <div class="module-text">
+                Consultar incidencias registradas y su estado.
+            </div>
+        </a>
+    </div>
+</div>

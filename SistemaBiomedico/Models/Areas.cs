@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaBiomedico.Models
 {
-    public class Rol
+    public class Areas
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdRol { get; set; }
-        [Required, StringLength(50)]
-        public string Nombre { get; set; }
-        public ICollection<Usuario> Usuarios { get; set; }
+        public int IdAreas { get; set; }
+        [Required, StringLength(100)]
+        public string NombreArea { get; set; }
+        public ICollection<Equipo> Equipos { get; set; }
     }
 }
 
